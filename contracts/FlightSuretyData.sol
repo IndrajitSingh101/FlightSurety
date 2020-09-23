@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.0;
 
 import "../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
 
@@ -345,7 +345,12 @@ dataAddr.transfer(creditsAvailable);
         return keccak256(abi.encodePacked(airline, flight, timestamp));
     }
 
-   
+   fallback() external payable{
 
+   }
+   receive() external payable{
+       
+   }
+  
 }
 

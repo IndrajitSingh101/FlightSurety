@@ -15,7 +15,7 @@ let STATUS_CODES = [0, 10, 20, 30, 40, 50];
 web3.eth.getAccounts((error, accounts) => {
   for(let i = 0; i < oracles; i++) {
     flightSuretyApp.methods.registerOracle()
-    .send({from: accounts[i], value: web3.utils.toWei("1",'ether'), gas: 0}, (error, result) => {
+    .send({from: accounts[i], value: web3.utils.toWei("1",'ether'), gas: 6721975}, (error, result) => {
       flightSuretyApp.methods.getMyIndexes().call({from: accounts[i]}, (error, result) => {
         let oracle = {
           address: accounts[i],
@@ -40,7 +40,7 @@ flightSuretyApp.events.OracleRequest({
       for(let i = 0; i < registeredOracles.length; i++) {
         if(registeredOracles[i].index.includes(index)) {
           flightSuretyApp.methods.submitOracleResponse(index, airline, flight, timestamp, statusCode)
-          .send({from: registeredOracles[i].address, gas: 0}, (error, result) => {
+          .send({from: registeredOracles[i].address, gas: 6721975}, (error, result) => {
             console.log("FROM " + JSON.stringify(registeredOracles[i]) + "STATUS CODE: " + statusCode);
           });
         }
@@ -54,6 +54,7 @@ app.get('/api', (req, res) => {
       message: 'An API for use with your Dapp!'
     })
 })
+
 
 export default app;
 

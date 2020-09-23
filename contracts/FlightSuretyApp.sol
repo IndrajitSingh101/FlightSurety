@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.0;
 
 // It's important to avoid vulnerabilities due to numeric overflow bugs
 // OpenZeppelin's SafeMath library, when used correctly, protects agains such bugs
@@ -75,7 +75,7 @@ contract FlightSuretyApp {
     */
     constructor
                                 (
-                                    address _dataContract
+                                    address payable _dataContract
                                 ) 
                                 public 
     {
@@ -132,8 +132,7 @@ contract FlightSuretyApp {
     function submitAirlineRegistrationFund() external payable requireIsOperational{
         require(!flightSuretyData.hasFundingBeenSubmitted(msg.sender),"Requester has already submitted Funding");
         require(msg.value==10 ether,"Requires registration funds be 10 ether");
-        address payable  dataAddr= address(uint160(address(flightSuretyData)));
-       dataAddr.transfer(msg.value);
+       payable(address(flightSuretyData)).transfer(msg.value);
        flightSuretyData.setFundingSubmitted(msg.sender);
     }
 
@@ -198,9 +197,8 @@ contract FlightSuretyApp {
 
 function buyInsurance(address airline,string calldata flight) external payable requireIsOperational{
     require(msg.value<=1 ether,"Insurance cannot be greater than 1 ether");
-    flightSuretyData.addToInsurancePolicy(airline,flight,msg.sender,msg.value); 
-    address payable  dataAddr= address(uint160( address(flightSuretyData)));
-   dataAddr.transfer(msg.value);
+    flightSuretyData.addToInsurancePolicy(airline,flight,msg.sender,msg.value);
+   payable(address(flightSuretyData)).transfer(msg.value);
 }
 
 function withdrawCredits() external requireIsOperational{
@@ -376,9 +374,7 @@ function withdrawCredits() external requireIsOperational{
         return random;
     }
 
-    function() external payable{
-
-    }
+  
 
 // endregion
 

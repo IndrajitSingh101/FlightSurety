@@ -44,8 +44,6 @@ contract('Flight Surety Tests', async (accounts) => {
   });
 
   it(`First airline is registered when contract is deployed`, async function () {
-    await config.flightSuretyApp.submitAirlineRegistrationFund(
-       {from: firstAirline, value: Web3.utils.toWei('10', "ether")});
     let wasRegistered = (
       await config.flightSuretyData.hasAirlineBeenRegistered.call(
         firstAirline));
