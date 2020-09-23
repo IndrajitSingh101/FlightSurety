@@ -39,6 +39,11 @@ To build dapp for prod:
 
 Deploy the contents of the ./dapp folder
 
+## Version of software
+Truffle v5.1.39 (core: 5.1.39)
+Solidity - ^0.6.0 (solc-js)
+Node v12.18.2
+Web3.js v1.2.1
 
 ## Resources
 
